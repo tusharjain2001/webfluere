@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-16T12:00:00.000Z",
+  "title": "Design System: Webfluere",
+  "extensions": {
+    "colorMeta": {
+      "plate": { "role": "neutral", "displayName": "Velvet Plate", "canonical": "#0b0a09", "tonalRamp": ["#0b0a09", "#1d1b19", "#34312d", "#4f4b46", "#6f6a64", "#948f88", "#bdb8b1", "#e8e4de"] },
+      "plate-raised": { "role": "neutral", "displayName": "Raised Plate", "canonical": "#13110f", "tonalRamp": ["#0b0a08", "#13110f", "#2a2622", "#443f39", "#645d56", "#8a827a", "#b5ada4", "#e5ded6"] },
+      "plate-deep": { "role": "neutral", "displayName": "Deep Plate", "canonical": "#2a2119", "tonalRamp": ["#120d09", "#2a2119", "#433529", "#5f4c3b", "#7e6751", "#a1876e", "#c5ad96", "#ebdccd"] },
+      "plate-brown": { "role": "neutral", "displayName": "Plate Brown", "canonical": "#5a4a3a", "tonalRamp": ["#1a130c", "#30251b", "#45372a", "#5a4a3a", "#7a6754", "#9e8b76", "#c5b39f", "#ebdecf"] },
+      "silver": { "role": "neutral", "displayName": "Silver", "canonical": "#dbd6d1", "tonalRamp": ["#1f1d1b", "#3a3734", "#58544f", "#78736d", "#9a948e", "#bbb5af", "#dbd6d1", "#f4f1ee"] },
+      "pewter": { "role": "neutral", "displayName": "Pewter", "canonical": "#a7a39a", "tonalRamp": ["#1d1c19", "#35332e", "#514e47", "#6f6c63", "#8d897f", "#a7a39a", "#cac6be", "#eeebe5"] },
+      "smoke": { "role": "neutral", "displayName": "Smoke", "canonical": "#3c3a37", "tonalRamp": ["#141312", "#252422", "#3c3a37", "#575450", "#76726d", "#99958f", "#c0bcb6", "#e9e6e1"] },
+      "burnished-base": { "role": "primary", "displayName": "Burnished Silver", "canonical": "url(/material/burnished.webp) over #c9c3bb", "tonalRamp": ["#221f1b", "#3f3b36", "#5f5a54", "#827c75", "#a59f97", "#c9c3bb", "#e0dbd4", "#f5f2ee"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline; scaled up for the closing call to action and footer wordmark." },
+      "headline": { "displayName": "Headline", "purpose": "Chapter statements in pinned and static sections." },
+      "title": { "displayName": "Title", "purpose": "Story steps, service names, concept names." },
+      "body": { "displayName": "Body", "purpose": "Offers and explanations in pewter, 38-52ch." },
+      "label": { "displayName": "Engraved Caption", "purpose": "Cinzel plate captions and concept kinds at 13px; content-bearing, never a heading intro." },
+      "control": { "displayName": "Control", "purpose": "The DM \"BUILD\" control label only." }
+    },
+    "materials": [
+      { "name": "burr", "value": "url(/material/burr.png) 256px 256px, fixed, opacity 0.1, z-index 60, pointer-events none", "purpose": "Rocked-burr stipple grain over the whole page; also at 60% inside scraped service passes." },
+      { "name": "burnished", "value": "url(/material/burnished.webp) 640px 160px over #c9c3bb", "purpose": "Brushed raster silver; the only light-bearing DOM material. Procedural (ffmpeg) raster." }
+    ],
+    "shadows": [
+      { "name": "burnished-lift", "value": "inset 0 1px 0 rgb(255 255 255 / 0.45), 0 12px 28px -14px rgb(0 0 0 / 0.9)", "purpose": "Lit top edge and soft fall for burnished silver only." }
+    ],
+    "motion": [
+      { "name": "ease-plate", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Default easing for entrances, nav hide, static reveals." },
+      { "name": "burnish-pass", "value": "background-position 900ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Raster slides 220px on hover of burnished silver." },
+      { "name": "hero-surface", "value": "opacity 0.25 to 1, blur 8px to 0, 1.4s ease-plate", "purpose": "Headline surfaces from the dark on load; offer and control follow at 0.25s and 0.4s from 30% opacity." },
+      { "name": "nav-hide", "value": "translateY(-110%) 0.45s ease-plate", "purpose": "Nav hides scrolling down past 320px." },
+      { "name": "smooth-scroll", "value": "Lenis lerp 0.09", "purpose": "Page scroll smoothing; disabled under reduced motion." },
+      { "name": "magnetic", "value": "spring stiffness 220, damping 16, mass 0.4, strength 0.3", "purpose": "Primary control follows a mouse pointer." },
+      { "name": "scene-light", "value": "pointLight #f1ebe2, intensity 55, decay 2; sweep sin(t * 0.32)", "purpose": "The single raking light of the 3D stage." },
+      { "name": "screen-burnish", "value": "emissiveIntensity 0.03-0.05 rest to 0.62-0.72 lit", "purpose": "Screens surface from the dark as the light passes." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "scene-wide", "value": "aspect-ratio > 1.1" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Burnished Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one primary control: DM \"BUILD\" in Cinzel on brushed raster silver.",
+      "html": "<a class=\"ds-btn-burnished\" href=\"#contact\">DM &ldquo;BUILD&rdquo;<svg aria-hidden=\"true\" width=\"16\" height=\"16\" viewBox=\"0 0 256 256\" fill=\"currentColor\"><path d=\"M200 64v104a8 8 0 0 1-16 0V83.31L69.66 197.66a8 8 0 0 1-11.32-11.32L172.69 72H88a8 8 0 0 1 0-16h104a8 8 0 0 1 8 8Z\"/></svg></a>",
+      "css": ".ds-btn-burnished { display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 48px; padding: 0 28px; border-radius: 2px; font-family: 'Cinzel', 'Trajan Pro', 'Times New Roman', serif; font-weight: 500; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; text-decoration: none; color: var(--plate, #0b0a09); background-color: #c9c3bb; background-image: url('/material/burnished.webp'); background-size: 640px 160px; background-position: 0 50%; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), 0 12px 28px -14px rgb(0 0 0 / 0.9); transition: background-position 900ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease; } .ds-btn-burnished svg { transition: transform 300ms; } .ds-btn-burnished:hover { background-position: -220px 50%; } .ds-btn-burnished:hover svg { transform: translate(2px, -2px); } .ds-btn-burnished:active { transform: translateY(1px); } .ds-btn-burnished:focus-visible { outline: 1px solid var(--silver, #dbd6d1); outline-offset: 4px; }"
+    },
+    {
+      "name": "Burnished Button, Nav Size",
+      "kind": "button",
+      "refersTo": "button-primary-sm",
+      "description": "Compact DM \"BUILD\" control that stays in the nav.",
+      "html": "<a class=\"ds-btn-burnished-sm\" href=\"#contact\">DM &ldquo;BUILD&rdquo;</a>",
+      "css": ".ds-btn-burnished-sm { display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 2px; font-family: 'Cinzel', 'Trajan Pro', serif; font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--plate, #0b0a09); background: #c9c3bb url('/material/burnished.webp') 0 50% / 640px 160px; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45), 0 12px 28px -14px rgb(0 0 0 / 0.9); transition: background-position 900ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-burnished-sm:hover { background-position: -220px 50%; } .ds-btn-burnished-sm:active { transform: translateY(1px); } .ds-btn-burnished-sm:focus-visible { outline: 1px solid var(--silver, #dbd6d1); outline-offset: 4px; }"
+    },
+    {
+      "name": "Hairline Button",
+      "kind": "button",
+      "refersTo": "button-hairline",
+      "description": "Secondary control: a rocked plate state with a smoke hairline. In the control API; not yet rendered on the page.",
+      "html": "<a class=\"ds-btn-hairline\" href=\"#work\">See the work</a>",
+      "css": ".ds-btn-hairline { display: inline-flex; align-items: center; height: 48px; padding: 0 28px; border-radius: 2px; border: 1px solid var(--smoke, #3c3a37); background: transparent; color: var(--silver, #dbd6d1); font-family: 'Cinzel', 'Trajan Pro', serif; font-weight: 500; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; transition: border-color 300ms; } .ds-btn-hairline:hover { border-color: var(--pewter, #a7a39a); } .ds-btn-hairline:active { transform: translateY(1px); } .ds-btn-hairline:focus-visible { outline: 1px solid var(--silver, #dbd6d1); outline-offset: 4px; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Fixed 68px bar: wordmark, two pewter links, nav-size burnished control; glass plate after scroll.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-mark\" href=\"#top\">Webfluere</a><div class=\"ds-nav-right\"><a class=\"ds-nav-link\" href=\"#work\">Work</a><a class=\"ds-nav-link\" href=\"#services\">Services</a><a class=\"ds-nav-cta\" href=\"#contact\">DM &ldquo;BUILD&rdquo;</a></div></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 68px; padding: 0 40px; background: rgb(11 10 9 / 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgb(60 58 55 / 0.6); font-family: 'Schibsted Grotesk Variable', 'Schibsted Grotesk', system-ui, sans-serif; } .ds-nav-mark { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: #dbd6d1; text-decoration: none; } .ds-nav-right { display: flex; align-items: center; gap: 32px; } .ds-nav-link { font-size: 14px; color: #a7a39a; text-decoration: none; transition: color 200ms; } .ds-nav-link:hover { color: #dbd6d1; } .ds-nav-link:focus-visible, .ds-nav-cta:focus-visible { outline: 1px solid #dbd6d1; outline-offset: 4px; } .ds-nav-cta { display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 2px; font-family: 'Cinzel', serif; font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: #0b0a09; background: #c9c3bb url('/material/burnished.webp') 0 50% / 640px 160px; transition: background-position 900ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-cta:hover { background-position: -220px 50%; }"
+    },
+    {
+      "name": "Engraved Caption",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "Cinzel plate caption naming a concept; always says it is a concept.",
+      "html": "<p class=\"ds-caption\">Plate I<br>Kiln &amp; Crumb, a concept</p>",
+      "css": ".ds-caption { margin: 0; font-family: 'Cinzel', 'Trajan Pro', 'Times New Roman', serif; font-size: 13px; font-weight: 500; line-height: 1.9; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pewter, #a7a39a); }"
+    },
+    {
+      "name": "Concept Card",
+      "kind": "card",
+      "refersTo": "work-image",
+      "description": "Work image resting in plate tones, burnished to true colour by the pointer, with a hairline caption row.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-frame\"><img class=\"ds-card-img\" src=\"/work/kiln.webp\" alt=\"Kiln & Crumb concept\"></div><div class=\"ds-card-row\"><h3 class=\"ds-card-name\">Kiln &amp; Crumb</h3><p class=\"ds-card-kind\">Bakery website, concept</p></div></article>",
+      "css": ".ds-card { display: flex; flex-direction: column; gap: 16px; } .ds-card-frame { aspect-ratio: 16 / 10; overflow: hidden; border-radius: 2px; background: #13110f; } .ds-card-img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: brightness(0.62) contrast(1.08) grayscale(1) sepia(0.18); transition: filter 600ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-card:hover .ds-card-img { filter: none; } .ds-card-row { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; padding-top: 16px; border-top: 1px solid rgb(60 58 55 / 0.6); } .ds-card-name { margin: 0; font-family: 'Schibsted Grotesk Variable', system-ui, sans-serif; font-size: 18px; font-weight: 500; letter-spacing: -0.01em; color: #dbd6d1; } .ds-card-kind { margin: 0; text-align: right; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #a7a39a; }"
+    },
+    {
+      "name": "Scraped Service Pass",
+      "kind": "custom",
+      "refersTo": "plate-brown",
+      "description": "Static services tile: plate-brown under rocked black and burr, the last pass burnished to silver.",
+      "html": "<ol class=\"ds-passes\"><li class=\"ds-pass\" style=\"--rock:0.76\"><h3>Responsive design</h3><p>Works as well on every phone and tablet as it does on desktop.</p></li><li class=\"ds-pass ds-pass-lit\"><h3>Smooth UX</h3><p>Fast, clear and free of friction.</p></li></ol>",
+      "css": ".ds-passes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; overflow: hidden; border-radius: 2px; border: 1px solid rgb(60 58 55 / 0.6); background: rgb(60 58 55 / 0.6); font-family: 'Schibsted Grotesk Variable', system-ui, sans-serif; } .ds-pass { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 18rem; padding: 28px; background: #5a4a3a; color: #dbd6d1; } .ds-pass::before { content: ''; position: absolute; inset: 0; background: #0b0a09; opacity: var(--rock); } .ds-pass::after { content: ''; position: absolute; inset: 0; background: url('/material/burr.png') 0 0 / 256px 256px; opacity: 0.6; } .ds-pass h3, .ds-pass p { position: relative; z-index: 1; margin: 0; } .ds-pass h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.02em; } .ds-pass p { margin-top: 12px; font-size: 15px; line-height: 1.625; opacity: 0.8; } .ds-pass-lit { color: #0b0a09; background: #c9c3bb url('/material/burnished.webp') 0 50% / 640px 160px; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.45); } .ds-pass-lit::before, .ds-pass-lit::after { display: none; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Mezzotint Plate",
+    "overview": "The page is a mezzotint plate: a copper ground rocked to velvet warm-black, from which work is scraped and burnished into light. One raking light does the burnishing. Screens, controls and concept plates surface from darkness only where that light reaches them, so the whole system reads as a single lit object rather than a stack of evenly lit panels.\n\nDensity is low and cinematic. Copy sits in a narrow column on one side of a full-bleed black field while a single React Three Fiber stage carries real devices (laptop, tablet, phones, a browser window) through pinned scroll chapters. Material is literal: a raster burr stipple over everything, a brushed raster silver on the primary control, warm plate-brown only where the plate has been half-scraped. Type is a tight grotesk for everything spoken and an engraved roman for the plate's captions and its one command.\n\nThe world refuses the dark agency hero with neon glow and evenly lit floating mockups, and (a user-pinned product rejection) abstract blobs, liquid or amoeba forms in place of real devices and screens.",
+    "keyCharacteristics": [
+      "Velvet warm-black ground (#0b0a09) under a fixed rocked-burr grain at 10% opacity.",
+      "Burnished silver is a brushed raster image, the only light-bearing material in the DOM.",
+      "One point light, no ambient or environment fill, in the one 3D stage.",
+      "Schibsted Grotesk for headings and UI; Cinzel uppercase for 13px engraved captions and the DM \"BUILD\" control.",
+      "2px corners everywhere a corner shows.",
+      "Pinned scroll chapters drive the 3D stage; reduced motion gets static sections."
+    ],
+    "rules": [
+      { "name": "The Only Light Rule", "body": "Silver as a material appears only as the burnished raster. Never draw it with a CSS gradient; gradients in this system are plate-coloured scrims and image masks only.", "section": "colors" },
+      { "name": "The Half-Scraped Rule", "body": "Plate-brown (and plate-deep, when it is used) appears only in passages that read as partially scraped plate (rocked black laid over them at varying opacity), never as flat section fills.", "section": "colors" },
+      { "name": "The Engraved Caption Rule", "body": "Cinzel is set at 13px, weight 500, uppercase, tracked 0.18em, in pewter. It captions a plate or labels a concept with real content; it never introduces a heading.", "section": "typography" },
+      { "name": "The Lining Figures Rule", "body": "Body sets `font-variant-numeric: lining-nums` so \"20+\" sits on the grotesk's cap line.", "section": "typography" },
+      { "name": "The Pinned Chapter Rule", "body": "Every scroll-driven 3D beat belongs to a `data-chapter` section whose sticky span is measured once (load, resize, fonts ready) and read inside the render loop, never from a scroll listener.", "section": "layout" },
+      { "name": "The One Raking Light Rule", "body": "The 3D stage has exactly one light, a point light: no ambient, hemisphere or environment map. It follows the mouse in the hero, sweeps on its own on touch, and rakes each chapter from above and in front of the look target.", "section": "elevation" },
+      { "name": "The Burnish Is Emissive Rule", "body": "A screen is revealed by raising its emissive intensity, never by adding a light or an outline. Only the plate facing the camera is burnished; its neighbours stay dark.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do set every surface on plate (#0b0a09) under the fixed burr stipple (256px tile, 10% opacity).",
+      "Do use the burnished raster for the primary control, with plate-coloured Cinzel uppercase at 13px and 0.22em tracking.",
+      "Do keep corners at 2px on controls, image frames and grids.",
+      "Do reveal screens and work by burnishing: emissive intensity in 3D, a pointer mask over plate-toned images in the DOM.",
+      "Do give every new 3D beat a `data-chapter` pinned section and a static equivalent for reduced motion.",
+      "Do label every concept as a concept in its engraved caption, and keep \"20+ projects shipped\" as the only number.",
+      "Do keep client proof hidden (rendering nothing in production) until real, permitted projects or quotes exist."
+    ],
+    "donts": [
+      "Don't draw silver with a CSS gradient; the silver is the brushed raster.",
+      "Don't add ambient, hemisphere or environment lighting, or a second light, to the stage.",
+      "Don't light devices evenly or add neon glow; the world rejects the evenly lit floating-mockup agency hero.",
+      "Don't replace devices and screens with abstract blobs, liquid or amoeba shapes.",
+      "Don't hold the headline, offer or DM \"BUILD\" control behind a reveal in the first viewport.",
+      "Don't use plate-brown as a flat section fill.",
+      "Don't invent clients, logos, quotes, prices or metrics."
+    ]
+  }
+}

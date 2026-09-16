@@ -1,0 +1,115 @@
+{
+  "title": "Choose the visual world for Webfluere",
+  "question": "One direction leads, fully committed. Keep it, take an alternate or the category standard, steer it, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Press Proof",
+      "kicker": "THE ROLL",
+      "lineage": "Offset press proofs and the press-check sign-off",
+      "thesis": "The site is a signed press proof: what a founder approves is exactly what runs, because the same team designs and builds. Refuses the dark agency hero with glowing floating devices.",
+      "palette": ["#F3F5F4", "#141414", "#E4007C", "#00A3E0", "#FFE500"],
+      "materials": ["coated proof stock", "process CMYK inks", "crop and registration marks", "the sign-off box"],
+      "viewport": "One full press sheet fills the screen: crop marks in the corners, a CMYK color bar along the top that doubles as navigation, a slug line in the bottom margin. Headline and a sign-off box sit left; right, a flat printed proof of a concept design lifts off the sheet and folds into a working 3D laptop and phone (React Three Fiber). The primary action is the magenta approval stamp: DM \"BUILD\".",
+      "risk": "If the devices do not lead, it can read as a print shop instead of a web studio; if the inks scatter instead of holding roles, it becomes a design-tool cliché.",
+      "raised": [
+        { "from": "challenger-mezzotint", "raise": "The sheet owns the whole first viewport as one continuous printed page: no floating cards or chrome inside it." },
+        { "from": "challenger-vu-meter", "raise": "Services repeat as identical proof panels on one row; the repeat is the ruler the eye reads." },
+        { "from": "challenger-akari", "raise": "Flat to volume: the printed plate lifting into the live 3D device is the page's one signature motion." },
+        { "from": "challenger-understory", "raise": "Magenta is reserved for the single approval mark and the DM action; nothing else wears it." },
+        { "from": "challenger-skate-deck", "raise": "Wordmark and project names are set to stay legible when shrunk to an Instagram avatar." }
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Drawing Set to Building",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Architectural construction drawings and site elevations",
+      "thesis": "Every project starts as a dimensioned drawing and ends as the finished building: the same hand draws and builds.",
+      "palette": ["#0E2A47", "#EAF1F7", "#FF6A13"],
+      "materials": ["blueprint linework", "dimension strings", "revision clouds", "title block"],
+      "viewport": "A technical elevation of a website drawn in fine linework with dimension strings; on scroll the drawing renders into the live 3D device, the title block holding the DM \"BUILD\" action.",
+      "risk": "Blueprint-to-build is a familiar agency metaphor; many runs in this category land near it."
+    },
+    {
+      "id": "challenger-riso",
+      "label": "Risograph Print System",
+      "verdict": "competitive",
+      "lineage": "Risograph zines and spot-ink posters",
+      "thesis": "The studio as a bold two-ink print run, loud and hand-made.",
+      "palette": ["#FFF6E8", "#FF3EA5", "#1E4FFF", "#FFD22A"],
+      "materials": ["fluorescent spot inks", "halftone grain", "misregistration"],
+      "viewport": "Huge two-ink display type over overlapping cut-paper shapes, services as ink-layered blocks, a pink primary button.",
+      "case": "Holds audience identification with Instagram-native creative culture; loses product clarity, because deliberate misregistration argues against sites that are built to work properly.",
+      "risk": "The warm paper ground is a model default and can read as a print studio rather than a web agency.",
+      "hero": "https://impeccable.style/worlds/cards/risograph-web-system-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/risograph-web-system.webp"
+    },
+    {
+      "id": "challenger-skate-deck",
+      "label": "Skate-Shop Deck Wall",
+      "verdict": "declined",
+      "lineage": "Skate shop deck racks",
+      "palette": ["#00FFE0", "#FF2DA6", "#0D0D0D"],
+      "materials": ["silkscreen ink", "grip tape", "maple"],
+      "case": "Founders and business owners do not see themselves on a skate rack, and decks do not explain websites or apps.",
+      "kept": "Logotypes built to survive scale-down.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-skate-deck-wall-hero.webp"
+    },
+    {
+      "id": "challenger-mezzotint",
+      "label": "Mezzotint Velvet Night",
+      "verdict": "declined",
+      "lineage": "Mezzotint printmaking",
+      "palette": ["#0B0B0B", "#D9D9D6", "#6B4A35"],
+      "materials": ["rocked black plate", "burnished highlights"],
+      "case": "A slow reveal from darkness hides the offer and the action a visitor needs within seconds.",
+      "kept": "Total commitment of one surface to the whole viewport.",
+      "hero": "https://impeccable.style/worlds/cards/ink-pigment-printmaking-mezzotint-velvet-night-hero.webp"
+    },
+    {
+      "id": "challenger-vu-meter",
+      "label": "VU-Meter Bridge",
+      "verdict": "declined",
+      "lineage": "Recording desk meter bridges",
+      "palette": ["#F1E9D2", "#111111", "#C8102E"],
+      "materials": ["meter glass", "ballistic needles"],
+      "case": "Needles would imply performance numbers Webfluere cannot truthfully claim.",
+      "kept": "Identical repeated units as the ruler.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-vu-meter-bridge-hero.webp"
+    },
+    {
+      "id": "challenger-akari",
+      "label": "Akari Paper Lamps",
+      "verdict": "declined",
+      "lineage": "Folded washi light sculpture",
+      "palette": ["#F4EAD5", "#B89565", "#E04A2F"],
+      "materials": ["washi", "bamboo ribs", "inner glow"],
+      "case": "Warm paper lanterns do not connect to founders buying a website, and the glow reads decorative.",
+      "kept": "Flat-to-volume unfolding as the signature motion.",
+      "hero": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-akari-light-sculpture-hero.webp"
+    },
+    {
+      "id": "challenger-understory",
+      "label": "Luminescent Understory",
+      "verdict": "declined",
+      "lineage": "Surreal bioluminescent worlds",
+      "palette": ["#0A0F0C", "#5FF2E6", "#B79CFF"],
+      "materials": ["spore glow", "pulsing veins"],
+      "case": "Glowing alien botany is the near-black-plus-neon default and says nothing about building websites.",
+      "kept": "One brightest mark reserved for the focused element.",
+      "hero": "https://impeccable.style/worlds/cards/dream-surreal-impossible-worlds-luminescent-alien-understory-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A modern agency site executed at full craft: bold headline, real work, clear services, one contact action.",
+    "palette": ["#0B0B0F", "#F5F5F4", "#4F46E5"],
+    "materials": ["clean grid", "device mockups", "case-study grid"],
+    "viewport": "Headline and DM \"BUILD\" action left, 3D devices with concept work right, services and work below.",
+    "risk": "Indistinguishable from other agencies by design."
+  },
+  "steer": true
+}
