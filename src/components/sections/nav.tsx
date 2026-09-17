@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { Logo } from '@/components/ui/logo'
 import { PlateButton } from '@/components/ui/plate-button'
 import { ease } from '@/lib/motion'
 import { site } from '@/lib/site'
@@ -27,8 +28,8 @@ export function Nav() {
       )}
     >
       <nav aria-label="Main" className="mx-auto flex h-[68px] max-w-[1400px] items-center justify-between px-5 md:px-10">
-        <a href="#top" className="text-lg font-semibold tracking-[-0.02em] text-silver">
-          Webfluere
+        <a href="#top" aria-label="Webfluere, back to top" className="text-lg font-semibold tracking-[-0.02em] text-silver">
+          <Logo />
         </a>
         <div className="flex items-center gap-8">
           <ul className="hidden items-center gap-8 text-sm text-pewter md:flex">

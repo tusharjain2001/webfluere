@@ -7,8 +7,8 @@ type GroupProps = ThreeElements['group']
 type MaterialRef = Ref<THREE.MeshStandardMaterial>
 
 // Shells carry no light of their own: with no ambient or environment fill they read only where the raking light catches them.
-const SHELL = { color: '#15130f', metalness: 0.85, roughness: 0.42 } as const
-const BEZEL = { color: '#050404', metalness: 0.3, roughness: 0.25 } as const
+const SHELL = { color: '#121826', metalness: 0.85, roughness: 0.42 } as const
+const BEZEL = { color: '#04060b', metalness: 0.3, roughness: 0.25 } as const
 
 export function roundedShape(w: number, h: number, r: number) {
   const x = -w / 2
@@ -101,11 +101,11 @@ export function Laptop({
       </RoundedBox>
       <mesh position={[0, 0.057, -0.2]} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[2.9, 1.15]} />
-        <meshStandardMaterial color="#0c0b09" roughness={0.85} />
+        <meshStandardMaterial color="#0a0e18" roughness={0.85} />
       </mesh>
       <mesh position={[0, 0.057, 0.72]} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[1.15, 0.55]} />
-        <meshStandardMaterial color="#1a1815" metalness={0.5} roughness={0.45} />
+        <meshStandardMaterial color="#161d2c" metalness={0.5} roughness={0.45} />
       </mesh>
       <group ref={lidRef} position={[0, 0.05, -1.1]} rotation-x={-0.26}>
         <RoundedBox args={[3.3, 2.15, 0.07]} radius={0.03} smoothness={4} position={[0, 1.075, 0]}>
@@ -171,12 +171,12 @@ export function BrowserWindow({ url, materialRef, ...props }: GroupProps & { url
   return (
     <group {...props}>
       <mesh geometry={body}>
-        <meshStandardMaterial color="#12100e" metalness={0.6} roughness={0.4} />
+        <meshStandardMaterial color="#0f1422" metalness={0.6} roughness={0.4} />
       </mesh>
       {[0, 1, 2].map((i) => (
         <mesh key={i} position={[-1.14 + i * 0.09, 0.84, 0.002]}>
           <circleGeometry args={[0.022, 16]} />
-          <meshStandardMaterial color="#3c3a37" roughness={0.6} />
+          <meshStandardMaterial color="#2b3650" roughness={0.6} />
         </mesh>
       ))}
       <group position={[0, -0.08, 0.003]}>
@@ -198,7 +198,7 @@ export function RingPanel({
   return (
     <group {...props}>
       <mesh geometry={frame}>
-        <meshStandardMaterial color="#100e0c" metalness={0.6} roughness={0.4} />
+        <meshStandardMaterial color="#0e1424" metalness={0.6} roughness={0.4} />
       </mesh>
       <group position-z={0.004}>
         <ScreenPlane url={url} width={width} height={height} radius={0.03} materialRef={materialRef} />

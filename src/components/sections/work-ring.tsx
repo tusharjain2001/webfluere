@@ -15,7 +15,7 @@ export function WorkRing() {
         <div className="relative mx-auto flex h-full max-w-[1400px] flex-col justify-between px-5 pt-24 pb-12 md:px-10 md:pt-28 md:pb-14">
           <div className="max-w-[34rem]">
             <h2 id="work-title" className="text-[clamp(2rem,3.6vw,3.25rem)] leading-[1.05] font-medium tracking-[-0.03em]">
-              Six concepts, made from scratch.
+              Six concepts, <span className="text-sky">made from scratch.</span>
             </h2>
             <p className="mt-4 max-w-[44ch] text-lg leading-relaxed text-pewter">
               Original websites and apps we designed to show our range. They are concepts, not client projects.
@@ -49,7 +49,7 @@ function ConceptCaption({
   return (
     <motion.li style={{ opacity, y }} className="[grid-area:1/1]">
       <h3 className="text-[clamp(1.75rem,3.2vw,3rem)] leading-none font-semibold tracking-[-0.03em]">{name}</h3>
-      <p className="mt-3 font-roman text-[13px] font-medium tracking-[0.18em] text-pewter uppercase">{kind}, concept</p>
+      <p className="mt-3 font-roman text-[13px] font-medium tracking-[0.18em] text-pewter uppercase">{kind}, <span className="text-sky">concept</span></p>
     </motion.li>
   )
 }

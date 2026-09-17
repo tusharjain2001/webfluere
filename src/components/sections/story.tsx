@@ -45,7 +45,7 @@ export function Story() {
 
             <motion.div style={{ opacity: promise, y: promiseY }} className="[grid-area:1/1] self-end md:self-center">
               <h3 className="text-[clamp(2rem,3.6vw,3.5rem)] leading-[1.05] font-medium tracking-[-0.03em] text-balance">
-                What you approve is what ships.
+                What you approve is what <span className="text-sky">ships.</span>
               </h3>
               <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-pewter">
                 We design it and we build it. No hand-off between a design studio and a separate developer.
@@ -72,7 +72,7 @@ function Step({
   const lit = useTransform(progress, (v) => 0.3 + 0.7 * fade(v, range[0], range[1], 0.03))
   return (
     <motion.li style={{ opacity: lit }}>
-      <h3 className="text-2xl font-semibold tracking-[-0.02em] md:text-3xl">{title}</h3>
+      <h3 className="text-2xl font-semibold tracking-[-0.02em] text-sky md:text-3xl">{title}</h3>
       <p className="mt-1.5 max-w-[38ch] leading-relaxed text-pewter">{body}</p>
     </motion.li>
   )

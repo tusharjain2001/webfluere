@@ -48,6 +48,11 @@ export default function App() {
         Skip to content
       </a>
       <Nav />
+      {/* Logo-blue light behind the 3D stage; it sits under the canvas so it never tints the devices. */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(42%_48%_at_72%_52%,rgba(30,111,230,0.2),transparent_70%)] max-md:bg-[radial-gradient(75%_32%_at_50%_26%,rgba(30,111,230,0.22),transparent_70%)]"
+      />
       {!reduce && (
         <Suspense fallback={null}>
           <StoryCanvas mode="fixed" />

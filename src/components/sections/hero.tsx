@@ -29,7 +29,7 @@ export function Hero({ withScene = false }: { withScene?: boolean }) {
             transition={{ duration: 1.4, ease }}
             className="text-[clamp(2.75rem,4.6vw,4.5rem)] leading-none font-semibold tracking-[-0.035em] text-balance text-silver"
           >
-            Designed and built by the same hands.
+            Designed and built by the <span className="text-sky">same hands.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0.3 }}
@@ -57,13 +57,13 @@ export function Hero({ withScene = false }: { withScene?: boolean }) {
             </Magnetic>
           </motion.div>
           <p className="mt-8 font-roman text-[13px] font-medium tracking-[0.18em] text-pewter uppercase md:hidden">
-            Plate I, Kiln &amp; Crumb, a concept
+            <span className="text-sky">Plate I</span>, Kiln &amp; Crumb, a concept
           </p>
         </div>
       </div>
 
       <p className="pointer-events-none absolute right-10 bottom-10 hidden text-right font-roman text-[13px] leading-[1.9] font-medium tracking-[0.18em] text-pewter uppercase md:block">
-        Plate I
+        <span className="text-sky">Plate I</span>
         <br />
         Kiln &amp; Crumb, a concept
       </p>

@@ -52,10 +52,12 @@ export function ServicesScroll() {
 }
 
 function ServiceTitle({ title, index, progress }: { title: string; index: number; progress: MotionValue<number> }) {
-  const opacity = useTransform(progress, (v) => 0.26 + 0.74 * weight(v, index))
+  const opacity = useTransform(progress, (v) => 0.3 + 0.7 * weight(v, index))
   const x = useTransform(progress, (v) => weight(v, index) * 10)
+  const lit = useTransform(progress, (v) => weight(v, index))
+  const color = useTransform(lit, [0, 1], ['#e6ecf5', '#5ca6ff'])
   return (
-    <motion.li style={{ opacity, x }} className="py-1 text-xl font-semibold tracking-[-0.02em] md:py-1.5 md:text-3xl">
+    <motion.li style={{ opacity, x, color }} className="py-1 text-xl font-semibold tracking-[-0.02em] md:py-1.5 md:text-3xl">
       {title}
     </motion.li>
   )

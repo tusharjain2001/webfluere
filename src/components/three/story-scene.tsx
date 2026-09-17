@@ -105,7 +105,7 @@ function heroPose({ aspect, wide, lightX }: Frame): ScenePose {
       phoneK: off([6, -2, 1]),
     },
     lid: -0.26,
-    layers: [0, 1, 0],
+    layers: [0, 0, 1],
     layerGlow: [1, 1, 1],
     spread: 0,
     cam: HOME_CAM,
@@ -274,6 +274,7 @@ function workPose({ wide }: Frame, p: number): ScenePose {
 
 function Stage({ staticHero, reduce }: { staticHero: boolean; reduce: boolean }) {
   const light = useRef<THREE.PointLight>(null)
+  const rim = useRef<THREE.PointLight>(null)
   const laptop = useRef<THREE.Group>(null)
   const lid = useRef<THREE.Group>(null)
   const browser = useRef<THREE.Group>(null)
@@ -389,6 +390,9 @@ function Stage({ staticHero, reduce }: { staticHero: boolean; reduce: boolean })
     }
 
     // One raking light, the only light in the scene: it follows the mouse in the hero, then sweeps each chapter.
+    if (rim.current) {
+      rim.current.position.set(pose.look[0] - sweep * 3, pose.look[1] - 2.4, pose.look[2] - 4)
+    }
     if (light.current) {
       light.current.position.set(
         lerp(pose.look[0] + sweep * 3, heroLightX, heroWeight),
@@ -400,7 +404,9 @@ function Stage({ staticHero, reduce }: { staticHero: boolean; reduce: boolean })
 
   return (
     <>
-      <pointLight ref={light} color="#f1ebe2" intensity={55} decay={2} distance={0} />
+      <pointLight ref={light} color="#eef3ff" intensity={55} decay={2} distance={0} />
+      {/* Logo-blue rim light from behind and below, so every device edge carries the brand colour. */}
+      <pointLight ref={rim} color="#3b8bff" intensity={40} decay={2} distance={0} />
       <group ref={laptop}>
         <Laptop screens={[TEX.sketch, TEX.design, TEX.build]} lidRef={lid} layerRefs={layerGroups} layerMaterialRefs={layerMats} />
       </group>
