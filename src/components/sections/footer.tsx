@@ -1,4 +1,5 @@
 import { Logo } from '@/components/ui/logo'
+import { site } from '@/lib/site'
 
 export function Footer() {
   return (
@@ -8,6 +9,9 @@ export function Footer() {
         <p className="md:text-center">Websites and apps, designed and built by one team</p>
         <div className="flex justify-between gap-6 md:justify-end md:gap-10">
           <p>&copy; {new Date().getFullYear()} Webfluere</p>
+          <a href={site.instagramUrl} target="_blank" rel="noreferrer" className="transition-colors duration-200 hover:text-silver">
+            Instagram
+          </a>
           <a href="#top" className="transition-colors duration-200 hover:text-silver">
             Back to top
           </a>

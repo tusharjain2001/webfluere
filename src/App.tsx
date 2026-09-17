@@ -1,7 +1,8 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef } from 'react'
 import { MotionConfig, useReducedMotion } from 'framer-motion'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
+import { ProjectDialogProvider } from '@/components/project/project-dialog'
 import { ClientProof } from '@/components/sections/client-proof'
 import { Contact } from '@/components/sections/contact'
 import { Footer } from '@/components/sections/footer'
@@ -15,17 +16,29 @@ import { Work } from '@/components/sections/work'
 import { WorkRing } from '@/components/sections/work-ring'
 import { measureChapters } from '@/lib/scroll-chapters'
 
-// three.js + R3F are heavy; load them after first paint so the headline never waits on WebGL.
-const StoryCanvas = lazy(() => import('@/components/three/story-scene').then((m) => ({ default: m.StoryCanvas })))
+// three.js + R3F are heavy, so they live in their own chunk. The download starts the moment this module runs,
+// in parallel with the first render, rather than waiting for React to reach the lazy component.
+const storyScene = import('@/components/three/story-scene')
+const StoryCanvas = lazy(() => storyScene.then((m) => ({ default: m.StoryCanvas })))
 
 export default function App() {
   const reduce = !!useReducedMotion()
+  const lenis = useRef<Lenis | null>(null)
 
   useEffect(() => {
     if (reduce) return
-    const lenis = new Lenis({ autoRaf: true, anchors: true, lerp: 0.09 })
-    return () => lenis.destroy()
+    lenis.current = new Lenis({ autoRaf: true, anchors: true, lerp: 0.09 })
+    return () => {
+      lenis.current?.destroy()
+      lenis.current = null
+    }
   }, [reduce])
+
+  // The page behind the project form stays put while it is open.
+  const onFormOpenChange = useCallback((open: boolean) => {
+    if (open) lenis.current?.stop()
+    else lenis.current?.start()
+  }, [])
 
   useEffect(() => {
     measureChapters()
@@ -41,48 +54,50 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[2px] focus:bg-silver focus:px-4 focus:py-2 focus:text-plate"
-      >
-        Skip to content
-      </a>
-      <Nav />
-      {/* Logo-blue light behind the 3D stage; it sits under the canvas so it never tints the devices. */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(42%_48%_at_72%_52%,rgba(30,111,230,0.2),transparent_70%)] max-md:bg-[radial-gradient(75%_32%_at_50%_26%,rgba(30,111,230,0.22),transparent_70%)]"
-      />
-      {!reduce && (
-        <Suspense fallback={null}>
-          <StoryCanvas mode="fixed" />
-        </Suspense>
-      )}
-      <main id="main" className="relative z-10">
-        <Hero withScene={reduce} />
-        {reduce ? (
-          <>
-            <Statement />
-            <Services />
-            <Work />
-          </>
-        ) : (
-          <>
-            <Story />
-            <ServicesScroll />
-            <WorkRing />
-          </>
+      <ProjectDialogProvider onOpenChange={onFormOpenChange}>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[2px] focus:bg-silver focus:px-4 focus:py-2 focus:text-plate"
+        >
+          Skip to content
+        </a>
+        <Nav />
+        {/* Logo-blue light behind the 3D stage; it sits under the canvas so it never tints the devices. */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(42%_48%_at_72%_52%,rgba(30,111,230,0.2),transparent_70%)] max-md:bg-[radial-gradient(75%_32%_at_50%_26%,rgba(30,111,230,0.22),transparent_70%)]"
+        />
+        {!reduce && (
+          <Suspense fallback={null}>
+            <StoryCanvas mode="fixed" />
+          </Suspense>
         )}
-        <ClientProof />
-        <Contact />
-      </main>
-      <Footer />
-      {/* Rocked-burr stipple: a fixed, pointer-free raster tile so it never repaints with scrolling content. */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-[60] opacity-[0.1]"
-        style={{ backgroundImage: 'url(/material/burr.png)', backgroundSize: '256px 256px' }}
-      />
+        <main id="main" className="relative z-10">
+          <Hero withScene={reduce} />
+          {reduce ? (
+            <>
+              <Statement />
+              <Services />
+              <Work />
+            </>
+          ) : (
+            <>
+              <Story />
+              <ServicesScroll />
+              <WorkRing />
+            </>
+          )}
+          <ClientProof />
+          <Contact />
+        </main>
+        <Footer />
+        {/* Rocked-burr stipple: a fixed, pointer-free raster tile so it never repaints with scrolling content. */}
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 z-[60] opacity-[0.1]"
+          style={{ backgroundImage: 'url(/material/burr.png)', backgroundSize: '256px 256px' }}
+        />
+      </ProjectDialogProvider>
     </MotionConfig>
   )
 }

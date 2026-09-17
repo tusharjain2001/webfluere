@@ -1,26 +1,28 @@
 import { createRef, Suspense, useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useTexture } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useReducedMotion } from 'framer-motion'
-import { BrowserWindow, Handheld, Laptop, RingPanel } from '@/components/three/devices'
+import { BrowserWindow, Handheld, Laptop, preloadScreen, RingPanel } from '@/components/three/devices'
 import { clamp01 } from '@/lib/motion'
 import { chapterEnter, chapterExit, chapterProgress } from '@/lib/scroll-chapters'
 import { concepts } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
+// Every device shows a different concept, so the stage never repeats one site across its screens.
+// Laptop: Marrow (sketch, design, build). Tablet: Aurel. Phones: Tidewell, Luma, Kiln & Crumb. Browser: Fieldnote.
 const TEX = {
-  sketch: '/work/tex/kiln-sketch.webp',
-  design: '/work/plate/kiln.webp',
-  build: '/work/tex/kiln.webp',
-  tablet: '/work/tex/kiln-tablet.webp',
+  sketch: '/work/tex/marrow-sketch.webp',
+  design: '/work/plate/marrow.webp',
+  build: '/work/tex/marrow.webp',
+  tablet: '/work/tex/aurel-tablet.webp',
   phoneKiln: '/work/tex/kiln-phone.webp',
   tidewell: '/work/tex/tidewell.webp',
   luma: '/work/tex/luma.webp',
   fieldnote: '/work/tex/fieldnote.webp',
 }
 const RING = concepts.map((c) => ({ url: `/work/tex/${c.slug}.webp`, phone: c.phone }))
-;[...Object.values(TEX), ...RING.map((r) => r.url)].forEach((url) => useTexture.preload(url))
+// Everything starts downloading as soon as this chunk loads, but only the hero's screens hold up the first frame (see Stage).
+;[...Object.values(TEX), ...RING.map((r) => r.url)].forEach(preloadScreen)
 
 type V3 = [number, number, number]
 type DevicePose = { p: V3; r: V3; s: number; glow: number }
@@ -204,7 +206,7 @@ function servicesPose({ aspect, wide }: Frame, t: number): ScenePose {
   const steps: ((f: number) => ScenePose)[] = [
     // Websites: the laptop alone.
     (f) => ({ ...base, d: { ...hidden, laptop: at(0, -0.8, 0, [0.18, -0.45 + f * 0.2, 0], 1.05, 0.55) } }),
-    // Responsive design: the same site on laptop, tablet and phone.
+    // Responsive design: laptop, tablet and phone side by side.
     (f) => ({
       ...base,
       d: {
@@ -294,6 +296,12 @@ function Stage({ staticHero, reduce }: { staticHero: boolean; reduce: boolean })
   const ringMats = useMemo(() => RING.map(() => createRef<THREE.MeshStandardMaterial>()), [])
   const pointer = useRef({ x: 0, active: false })
   const lookTarget = useMemo(() => new THREE.Vector3(), [])
+  const gl = useThree((state) => state.gl)
+
+  // Reveal the canvas only once the hero's devices can draw, so it fades in with them instead of empty.
+  useEffect(() => {
+    gl.domElement.style.opacity = '1'
+  }, [gl])
 
   useEffect(() => {
     if (reduce) return
@@ -425,18 +433,21 @@ function Stage({ staticHero, reduce }: { staticHero: boolean; reduce: boolean })
       <group ref={phoneK}>
         <Handheld kind="phone" url={TEX.phoneKiln} materialRef={phoneKMat} />
       </group>
-      <group ref={ring}>
-        {RING.map((item, i) => (
-          <group key={item.url} ref={ringItems[i]}>
-            <RingPanel
-              url={item.url}
-              width={item.phone ? 0.95 : 2.6}
-              height={item.phone ? 2.05 : 1.625}
-              materialRef={ringMats[i]}
-            />
-          </group>
-        ))}
-      </group>
+      {/* The concept ring is far down the page, so its screens load behind their own boundary and never delay the hero. */}
+      <Suspense fallback={null}>
+        <group ref={ring}>
+          {RING.map((item, i) => (
+            <group key={item.url} ref={ringItems[i]}>
+              <RingPanel
+                url={item.url}
+                width={item.phone ? 0.95 : 2.6}
+                height={item.phone ? 2.05 : 1.625}
+                materialRef={ringMats[i]}
+              />
+            </group>
+          ))}
+        </group>
+      </Suspense>
     </>
   )
 }
@@ -456,9 +467,10 @@ export function StoryCanvas({ mode = 'fixed' }: { mode?: 'fixed' | 'hero' }) {
         frameloop={reduce ? 'demand' : 'always'}
         onCreated={({ gl }) => {
           const canvas = gl.domElement
+          // Shader compile status is only checked in development; in production the GPU compiles without blocking the page.
+          gl.debug.checkShaderErrors = import.meta.env.DEV
           canvas.style.opacity = '0'
-          canvas.style.transition = 'opacity 1.2s ease'
-          requestAnimationFrame(() => (canvas.style.opacity = '1'))
+          canvas.style.transition = 'opacity 0.8s ease'
         }}
       >
         <Suspense fallback={null}>

@@ -2,9 +2,8 @@ import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { Magnetic } from '@/components/ui/magnetic'
-import { PlateButton } from '@/components/ui/plate-button'
+import { StartProjectButton } from '@/components/project/project-dialog'
 import { ease } from '@/lib/motion'
-import { site } from '@/lib/site'
 
 const StoryCanvas = lazy(() => import('@/components/three/story-scene').then((m) => ({ default: m.StoryCanvas })))
 
@@ -47,17 +46,16 @@ export function Hero({ withScene = false }: { withScene?: boolean }) {
             className="mt-10"
           >
             <Magnetic>
-              <PlateButton href={site.instagramUrl} aria-label={site.ctaLabel}>
-                DM &ldquo;BUILD&rdquo;
+              <StartProjectButton>
                 <ArrowUpRight
                   aria-hidden
                   className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
-              </PlateButton>
+              </StartProjectButton>
             </Magnetic>
           </motion.div>
           <p className="mt-8 font-roman text-[13px] font-medium tracking-[0.18em] text-pewter uppercase md:hidden">
-            <span className="text-sky">Plate I</span>, Kiln &amp; Crumb, a concept
+            <span className="text-sky">Plate I</span>, Marrow, a concept
           </p>
         </div>
       </div>
@@ -65,7 +63,7 @@ export function Hero({ withScene = false }: { withScene?: boolean }) {
       <p className="pointer-events-none absolute right-10 bottom-10 hidden text-right font-roman text-[13px] leading-[1.9] font-medium tracking-[0.18em] text-pewter uppercase md:block">
         <span className="text-sky">Plate I</span>
         <br />
-        Kiln &amp; Crumb, a concept
+        Marrow, a concept
       </p>
     </section>
   )

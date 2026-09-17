@@ -1,7 +1,7 @@
 import { useEffect, useMemo, type Ref } from 'react'
 import * as THREE from 'three'
-import { useThree, type ThreeElements } from '@react-three/fiber'
-import { RoundedBox, useTexture } from '@react-three/drei'
+import { useLoader, useThree, type ThreeElements } from '@react-three/fiber'
+import { RoundedBox } from '@react-three/drei'
 
 type GroupProps = ThreeElements['group']
 type MaterialRef = Ref<THREE.MeshStandardMaterial>
@@ -35,13 +35,33 @@ export function roundedPlane(w: number, h: number, r: number) {
   return geometry
 }
 
+// Screens load as ImageBitmaps: the browser decodes them off the main thread, so uploading them to the GPU
+// doesn't freeze the page the way decoding a plain <img> during upload does.
+/** Starts downloading and decoding a screen image before any component asks for it. */
+export const preloadScreen = (url: string) => useLoader.preload(THREE.ImageBitmapLoader, url)
+
+const screenTextures = new WeakMap<ImageBitmap, THREE.Texture>()
+
 function useScreenTexture(url: string) {
-  const texture = useTexture(url)
+  const bitmap = useLoader(THREE.ImageBitmapLoader, url)
   const gl = useThree((state) => state.gl)
-  useEffect(() => {
+  // One texture per image, so a screenshot used by two devices is only uploaded once.
+  let texture = screenTextures.get(bitmap)
+  if (!texture) {
+    texture = new THREE.Texture(bitmap)
+    // Bitmaps ignore WebGL's flip-on-upload, so the flip happens in the UV transform instead (works in every browser).
+    texture.flipY = false
+    texture.repeat.set(1, -1)
+    texture.offset.set(0, 1)
     texture.colorSpace = THREE.SRGBColorSpace
     texture.anisotropy = Math.min(8, gl.capabilities.getMaxAnisotropy())
     texture.needsUpdate = true
+    screenTextures.set(bitmap, texture)
+  }
+  useEffect(() => {
+    // Upload while the browser is idle, so screens that first appear mid-scroll don't stutter.
+    const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 200))
+    idle(() => gl.initTexture(texture))
   }, [texture, gl])
   return texture
 }

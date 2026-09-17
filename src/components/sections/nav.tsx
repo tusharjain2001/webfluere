@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { Logo } from '@/components/ui/logo'
-import { PlateButton } from '@/components/ui/plate-button'
+import { StartProjectButton } from '@/components/project/project-dialog'
 import { ease } from '@/lib/motion'
-import { site } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
 export function Nav() {
@@ -44,9 +43,7 @@ export function Nav() {
               </a>
             </li>
           </ul>
-          <PlateButton href={site.instagramUrl} size="sm" aria-label={site.ctaLabel}>
-            DM &ldquo;BUILD&rdquo;
-          </PlateButton>
+          <StartProjectButton size="sm" />
         </div>
       </nav>
     </motion.header>

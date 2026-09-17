@@ -98,8 +98,55 @@
   }
 }
 
+/* Project form: the dialog fades in over a blurred plate and the panel rises into place. */
+.project-dialog {
+  opacity: 0;
+  transition:
+    opacity 300ms ease,
+    overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
+}
+.project-dialog[open] {
+  opacity: 1;
+}
+.project-dialog::backdrop {
+  background: rgb(4 6 11 / 0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color 300ms ease,
+    backdrop-filter 300ms ease,
+    overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
+}
+.project-dialog[open]::backdrop {
+  background: rgb(4 6 11 / 0.72);
+  backdrop-filter: blur(6px);
+}
+.project-panel {
+  transform: translateY(24px);
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-dialog[open] .project-panel {
+  transform: none;
+}
+@starting-style {
+  .project-dialog[open] {
+    opacity: 0;
+  }
+  .project-dialog[open]::backdrop {
+    background: rgb(4 6 11 / 0);
+    backdrop-filter: blur(0);
+  }
+  .project-dialog[open] .project-panel {
+    transform: translateY(24px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .burnished {
+  .burnished,
+  .project-dialog,
+  .project-dialog::backdrop,
+  .project-panel {
     transition: none;
   }
 }

@@ -3,9 +3,11 @@
 export const site = {
   name: 'Webfluere',
   claim: '20+ projects shipped',
-  instagramHandle: '[ADD HANDLE]',
-  instagramUrl: '#contact',
-  ctaLabel: 'Send Webfluere a DM on Instagram with the word BUILD',
+  instagramHandle: '@web_fluere',
+  instagramUrl: 'https://www.instagram.com/web_fluere/',
+  cta: 'Start a project',
+  /** Web3Forms access key (web3forms.com). Submissions are emailed to the address the key was created with. */
+  formKey: import.meta.env.VITE_WEB3FORMS_KEY as string | undefined,
 }
 
 export const isPlaceholder = (value: string) => value.startsWith('[')

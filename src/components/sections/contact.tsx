@@ -1,4 +1,5 @@
-import { ArrowUpRight } from '@phosphor-icons/react'
+import { ArrowUpRight, InstagramLogo } from '@phosphor-icons/react'
+import { StartProjectButton } from '@/components/project/project-dialog'
 import { Magnetic } from '@/components/ui/magnetic'
 import { PlateButton } from '@/components/ui/plate-button'
 import { site } from '@/lib/site'
@@ -12,23 +13,29 @@ export function Contact() {
           You bring the idea. <span className="text-sky">We&rsquo;ll build the rest.</span>
         </h2>
         <p className="mt-7 max-w-[44ch] text-lg leading-relaxed text-pewter">
-          Send us a DM on Instagram with the word BUILD and tell us what you&rsquo;re working on. {site.claim}, and yours
-          could be next.
+          Send us a message about what you&rsquo;re working on and we&rsquo;ll reply by email. {site.claim}, and yours could
+          be next.
         </p>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Magnetic>
-            <PlateButton href={site.instagramUrl} aria-label={site.ctaLabel}>
-              DM &ldquo;BUILD&rdquo;
+            <StartProjectButton>
               <ArrowUpRight
                 aria-hidden
                 className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
-            </PlateButton>
+            </StartProjectButton>
           </Magnetic>
+          <PlateButton
+            href={site.instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            variant="hairline"
+            aria-label={`Webfluere on Instagram, ${site.instagramHandle}`}
+          >
+            <InstagramLogo aria-hidden className="size-4 text-sky" />
+            {site.instagramHandle}
+          </PlateButton>
         </div>
-        <p className="mt-6 text-sm text-pewter">
-          Instagram <span className="text-sky">{site.instagramHandle}</span>
-        </p>
       </div>
     </section>
   )
