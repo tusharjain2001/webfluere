@@ -18,7 +18,7 @@ export function WorkRing() {
               Six concepts, <span className="text-sky">made from scratch.</span>
             </h2>
             <p className="mt-4 max-w-[44ch] text-lg leading-relaxed text-pewter">
-              Original websites and apps we designed to show our range. They are concepts, not client projects.
+              Original websites and apps we designed from a blank page to show our range. These are our own concepts.
             </p>
           </div>
           <ul className="grid">

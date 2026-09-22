@@ -10,4 +10,13 @@ export default defineConfig({
       '@': path.resolve(import.meta.dirname, './src'),
     },
   },
+  build: {
+    // Two pages: the landing page and /about/.
+    rollupOptions: {
+      input: {
+        main: path.resolve(import.meta.dirname, 'index.html'),
+        about: path.resolve(import.meta.dirname, 'about/index.html'),
+      },
+    },
+  },
 })

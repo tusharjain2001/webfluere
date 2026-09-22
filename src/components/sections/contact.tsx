@@ -13,8 +13,8 @@ export function Contact() {
           You bring the idea. <span className="text-sky">We&rsquo;ll build the rest.</span>
         </h2>
         <p className="mt-7 max-w-[44ch] text-lg leading-relaxed text-pewter">
-          Send us a message about what you&rsquo;re working on and we&rsquo;ll reply by email. {site.claim}, and yours could
-          be next.
+          Tell us what you&rsquo;re working on and we&rsquo;ll reply by email. {site.claim}, every Upwork job rated five
+          stars, and yours could be next.
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
           <Magnetic>

@@ -5,9 +5,9 @@ import { site } from '@/lib/site'
 
 // One pinned step per service; the 3D stage stages each one in the same order (story-scene.tsx).
 const services = [
-  { title: 'Websites', body: 'A site that makes your business look established from the first second.' },
-  { title: 'Responsive design', body: 'Works as well on every phone and tablet as it does on desktop.' },
-  { title: 'Apps', body: 'Smooth, easy-to-use apps your customers can pick up straight away.' },
+  { title: 'Websites', body: 'Landing pages and business sites that make you look established from the first second.' },
+  { title: 'Responsive design', body: 'Built to match your Figma or PSD on every phone, tablet and desktop.' },
+  { title: 'Apps', body: 'Web apps and e-commerce storefronts in React and Next.js that customers pick up straight away.' },
   { title: 'SEO foundations', body: 'Clean structure, fast pages and a solid setup, built so people can find you.' },
   { title: 'Smooth UX', body: 'Fast, clear and free of friction for the people using what we build.' },
 ]

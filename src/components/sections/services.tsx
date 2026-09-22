@@ -6,9 +6,9 @@ import { cn } from '@/lib/utils'
 // Static fallback (reduced motion). Each service is one pass of the scraper: the plate is rocked black,
 // then scraped back toward plate-brown, and the last is burnished to silver.
 const services = [
-  { title: 'Websites', body: 'A site that makes your business look established from the first second.', rock: 0.9 },
-  { title: 'Responsive design', body: 'Works as well on every phone and tablet as it does on desktop.', rock: 0.76 },
-  { title: 'Apps', body: 'Smooth, easy-to-use apps your customers can pick up straight away.', rock: 0.6 },
+  { title: 'Websites', body: 'Landing pages and business sites that make you look established from the first second.', rock: 0.9 },
+  { title: 'Responsive design', body: 'Built to match your Figma or PSD on every phone, tablet and desktop.', rock: 0.76 },
+  { title: 'Apps', body: 'Web apps and e-commerce storefronts in React and Next.js that customers pick up straight away.', rock: 0.6 },
   { title: 'SEO foundations', body: 'Clean structure, fast pages and a solid setup, built so people can find you.', rock: 0.42 },
   { title: 'Smooth UX', body: 'Fast, clear and free of friction for the people using what we build.', rock: 0 },
 ]

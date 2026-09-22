@@ -74,6 +74,7 @@ export default function App() {
         )}
         <main id="main" className="relative z-10">
           <Hero withScene={reduce} />
+          <ClientProof />
           {reduce ? (
             <>
               <Statement />
@@ -87,7 +88,6 @@ export default function App() {
               <WorkRing />
             </>
           )}
-          <ClientProof />
           <Contact />
         </main>
         <Footer />
